@@ -36,7 +36,8 @@ class Perceptron():
         X = self.add_intercept(X)
         y = self.map_01_to_pm1(y)
         self.weights = np.zeros(X.shape[1])
-
+        print('x size: ', np.shape(X))
+        print('weight size: ', np.shape(self.weights))
         for n_iters in range(1, 1 + self.max_iter):
             stop = self.update_weights(X, y)
             if stop:
@@ -84,8 +85,21 @@ class Perceptron():
         Returns:
             Boolean indicating whether the Perceptron has converged
         """
-        raise NotImplementedError
-
+        print('update_weights')
+        isConverge = False
+        for i in range(X.shape[0]):
+            g=np.dot(np.dot(X[i,:],self.weights),y[i])
+            print('g: ', g)
+            if g>0:
+                self.weights = self.weights
+            else:
+                self.weights = self.weights+X[i,:]*self.learning_rate*y[i]
+            print('weights: ', self.weights)
+        h=np.dot(X,self.weights)*y
+        if np.all((h) > 0) == True:
+            isConverge = True
+        print(isConverge)
+        return isConverge
     def predict(self, X):
         """
         Given features, a 2D numpy array, use the trained model to predict
@@ -101,7 +115,12 @@ class Perceptron():
             predictions (np.ndarray): Output of trained model on features,
                 with predictions converted to {0, 1} labels.
         """
-
+        print('predict')
+        predictions = np.zeros(X.shape[0])
         X = self.add_intercept(X)
-        raise NotImplementedError
+        for i in range(X.shape[0]):
+            if np.dot(X[i,:],self.weights)>0:
+                predictions[i] = 1
+            else:
+                predictions[i] = -1
         return self.map_pm1_to_01(predictions)
