@@ -49,7 +49,7 @@ class SquaredLoss:
             y_true = y_true.reshape(-1, 1)
         
         self.input_ = (y_pred, y_true)
-        MSE = np.mean((y_true-y_pred)^2)
+        MSE = np.mean((y_true-y_pred)**2)
         return MSE
     def backward(self, grad=None, lr=None):
         """
@@ -60,5 +60,7 @@ class SquaredLoss:
             `backward` functions, but will never be passed anything.
         """
         assert grad is None
+        (y_pred, y_true) = self.input_
+        grad = (y_pred-y_true)*2
+        return grad
         
-        raise NotImplementedError

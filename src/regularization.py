@@ -33,7 +33,17 @@ class Regularizer:
         Note: weights[0, :] contains the intercept, and you should not apply
             regularization to those parameters.
         """
-        raise NotImplementedError
+        grad = np.zeros((weights.shape[0],weights.shape[1]))
+        for i in range(1,weights.shape[0]):
+            for j in range(weights.shape[1]):
+                if weights[i,j]>0:
+                    grad[i,j] = 1
+                elif weights[i,j]<0:
+                    grad[i,j] = -1
+                else:
+                    grad[i,j] = 0
+            
+        return grad * self.alpha
 
     def l2_grad(self, weights):
         """
@@ -46,4 +56,9 @@ class Regularizer:
         Note: weights[0, :] contains the intercept, and you should not apply
             regularization to those parameters.
         """
-        raise NotImplementedError
+        grad = np.zeros((weights.shape[0],weights.shape[1]))
+        for i in range(1,weights.shape[0]):
+            for j in range(weights.shape[1]):
+                grad[i,j] = 2*weights[i,j]
+            
+        return grad * self.alpha
