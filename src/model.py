@@ -35,7 +35,10 @@ class Model:
 
         Return the output of the final layer.
         """
-        raise NotImplementedError
+        for layer in self.layers:
+            X = layer.forward(X)
+
+        return X
 
     def backward(self, pred, y):
         """
@@ -50,7 +53,12 @@ class Model:
 
         Returns None
         """
-        raise NotImplementedError
+        l = reversed(self.layers)
+        meang=self.loss.forward(pred,y)
+        grad=self.loss.backward()
+        for layer in l: 
+            grad=layer.backward(grad,self.learning_rate)
+        return None
 
     def fit(self, X, y, max_iter=10000):
         """
@@ -63,7 +71,10 @@ class Model:
 
         Returns None
         """
-        raise NotImplementedError
+        for i in range(max_iter):
+            p = self.forward(X)
+            self.backward(p,y)
+        return None
 
 
 def main():

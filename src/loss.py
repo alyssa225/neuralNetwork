@@ -47,9 +47,10 @@ class SquaredLoss:
             y_pred = y_pred.reshape(-1, 1)
         if len(y_true.shape) == 1:
             y_true = y_true.reshape(-1, 1)
-
-        raise NotImplementedError
-
+        
+        self.input_ = (y_pred, y_true)
+        MSE = np.mean((y_true-y_pred)^2)
+        return MSE
     def backward(self, grad=None, lr=None):
         """
         Compute the gradient of the loss function
@@ -59,5 +60,5 @@ class SquaredLoss:
             `backward` functions, but will never be passed anything.
         """
         assert grad is None
-
+        
         raise NotImplementedError
