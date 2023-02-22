@@ -42,7 +42,8 @@ class ReluActivation:
         Then, return max(0, x) as a numpy calculation
         """
 
-        raise NotImplementedError
+        self.input_=x
+        return np.maximum(0,x)
 
     def backward(self, grad, lr=None):
         """
@@ -57,8 +58,7 @@ class ReluActivation:
             so you don't need to use `lr`
           - But do remember to include `grad` in your calculation!
         """
-
-        raise NotImplementedError
+        return grad*(self.input_>=0)
 
 
 class FullyConnected:
@@ -131,6 +131,8 @@ class FullyConnected:
         # If using regularization, perform an additional update to self.weights
         #     (Hint: it should look similar to the above weight update)
         if self.regularizer is not None:
-            raise NotImplementedError
+            w = self.weights
+            self.weights-=self.regularizer.grad(w)*lr
+            
 
         return new_grad
