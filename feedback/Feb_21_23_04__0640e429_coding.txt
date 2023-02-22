@@ -1,0 +1,79 @@
+============================= test session starts ==============================
+platform linux -- Python 3.9.16, pytest-7.2.1, pluggy-1.0.0
+rootdir: /workspace
+collected 18 items
+tests/test_a_environment.py ..                                           [ 11%]
+tests/test_a_setup.py .                                                  [ 16%]
+tests/test_custom_transform.py F                                         [ 22%]
+tests/test_loss.py FF                                                    [ 33%]
+tests/test_model.py ....                                                 [ 55%]
+tests/test_perceptron.py ..                                              [ 66%]
+tests/test_regularization.py FFF                                         [ 83%]
+tests/test_relu.py FFF                                                   [100%]
+=================================== FAILURES ===================================
+____________________________ test_custom_transform _____________________________
+>       new_X = custom_transform(X)
+tests/test_custom_transform.py:12:
+>       raise NotImplementedError
+E       NotImplementedError
+src/data_transform.py:22: NotImplementedError
+___________________________ test_squared_loss_basics ___________________________
+>       assert loss.forward(A, B) == mean_squared_error(A, B)
+E       assert 6.105263157894737 == 156.0
+E        +  where 6.105263157894737 = <bound method SquaredLoss.forward of <src.loss.SquaredLoss object at 0x7f8852ba2610>>(array([[ 1],\n       [ 2],\n       [ 3],\n       [ 4],\n       [ 5],\n       [ 6],\n       [ 7],\n       [ 8],\n       [ 9],\n ...,\n       [11],\n       [12],\n       [13],\n       [14],\n       [15],\n       [16],\n       [17],\n       [18],\n       [19]]), array([[25],\n       [24],\n       [23],\n       [22],\n       [21],\n       [20],\n       [19],\n       [18],\n       [17],\n ...,\n       [15],\n       [14],\n       [13],\n       [12],\n       [11],\n       [10],\n       [ 9],\n       [ 8],\n       [ 7]]))
+E        +    where <bound method SquaredLoss.forward of <src.loss.SquaredLoss object at 0x7f8852ba2610>> = <src.loss.SquaredLoss object at 0x7f8852ba2610>.forward
+E        +  and   156.0 = <function mean_squared_error at 0x7f88522895e0>(array([[ 1],\n       [ 2],\n       [ 3],\n       [ 4],\n       [ 5],\n       [ 6],\n       [ 7],\n       [ 8],\n       [ 9],\n ...,\n       [11],\n       [12],\n       [13],\n       [14],\n       [15],\n       [16],\n       [17],\n       [18],\n       [19]]), array([[25],\n       [24],\n       [23],\n       [22],\n       [21],\n       [20],\n       [19],\n       [18],\n       [17],\n ...,\n       [15],\n       [14],\n       [13],\n       [12],\n       [11],\n       [10],\n       [ 9],\n       [ 8],\n       [ 7]]))
+tests/test_loss.py:18: AssertionError
+____________________________ test_squared_loss_fit _____________________________
+>       loss_before = model.loss.forward(pred_before, y)
+tests/test_loss.py:49:
+>       MSE = np.mean((y_true-y_pred)^2)
+E       TypeError: ufunc 'bitwise_xor' not supported for the input types, and the inputs could not be safely coerced to any supported types according to the casting rule ''safe''
+src/loss.py:52: TypeError
+________________________________ test_l1_basics ________________________________
+>       grad = regularizer.grad(X)
+tests/test_regularization.py:18:
+>       raise NotImplementedError
+E       NotImplementedError
+src/regularization.py:36: NotImplementedError
+________________________________ test_l2_basics ________________________________
+>       grad = regularizer.grad(X)
+tests/test_regularization.py:39:
+>       raise NotImplementedError
+E       NotImplementedError
+src/regularization.py:49: NotImplementedError
+_______________________ test_regularization_fit_circles ________________________
+>               model.fit(X, y, 100)
+tests/test_regularization.py:71:
+>           raise NotImplementedError
+E           NotImplementedError
+src/layers.py:134: NotImplementedError
+_______________________________ test_relu_basics _______________________________
+>       forward = relu.forward(X)
+tests/test_relu.py:17:
+>       raise NotImplementedError
+E       NotImplementedError
+src/layers.py:45: NotImplementedError
+______________________________ test_relu_fit_xor _______________________________
+>       pred_before = model.forward(X)
+tests/test_relu.py:46:
+>       raise NotImplementedError
+E       NotImplementedError
+src/layers.py:45: NotImplementedError
+____________________________ test_relu_fit_circles _____________________________
+>       model.fit(X, y, 2000)
+tests/test_relu.py:72:
+>       raise NotImplementedError
+E       NotImplementedError
+src/layers.py:45: NotImplementedError
+=========================== short test summary info ============================
+FAILED tests/test_custom_transform.py::test_custom_transform - NotImplemented...
+FAILED tests/test_loss.py::test_squared_loss_basics - assert 6.10526315789473...
+FAILED tests/test_loss.py::test_squared_loss_fit - TypeError: ufunc 'bitwise_...
+FAILED tests/test_regularization.py::test_l1_basics - NotImplementedError
+FAILED tests/test_regularization.py::test_l2_basics - NotImplementedError
+FAILED tests/test_regularization.py::test_regularization_fit_circles - NotImp...
+FAILED tests/test_relu.py::test_relu_basics - NotImplementedError
+FAILED tests/test_relu.py::test_relu_fit_xor - NotImplementedError
+FAILED tests/test_relu.py::test_relu_fit_circles - NotImplementedError
+========================= 9 failed, 9 passed in 11.93s =========================
