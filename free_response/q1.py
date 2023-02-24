@@ -91,8 +91,8 @@ def two_class():
     On Zach's M1 Macbook, this takes ~20 seconds to run
     """
     # Consider changing these lines for your answers in Q1a
-    X, y = load_digits(classes=(0, 1), n=10000)
-    hidden_layer_sizes = (8, )
+    X, y = load_digits(classes=(0,1), n=10000)
+    hidden_layer_sizes = (1, )
     max_iter = 200
 
     # Don't change the rest of this function
@@ -132,10 +132,10 @@ def ten_class():
     """
 
     # Consider changing these lines for your answers in Q1b
-    hidden_layer_sizes = (32,)
-    max_iter = 100
+    hidden_layer_sizes = (64,)
+    max_iter = 200
     sklearn_kwargs = {}
-    X, y = load_digits(classes=range(10), n=10000)
+    X, y = load_digits(classes=(0,1), n=15000)
 
     # Don't change the rest of the function
     np.random.seed(42)

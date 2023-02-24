@@ -58,9 +58,9 @@ def main():
     """
 
     # Try changing the layer structure and hyperparameters
-    n_iters = 10000
+    n_iters = 200
     learning_rate = 1
-    reg = Regularizer(alpha=0, penalty="l2")
+    reg = Regularizer(alpha=1, penalty="l2")
     layers = [
         FullyConnected(2, 32, regularizer=reg),
         SigmoidActivation(),
