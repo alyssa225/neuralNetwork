@@ -19,4 +19,11 @@ def custom_transform(data):
     Returns:
         A transformed data matrix that is (more) easily classified.
     """
+    r = np.zeros(data.shape[0])
+    theta = np.zeros(data.shape[0])
+    for i in range(data.shape[0]):
+        r[i] = np.sqrt(data[i,0]**2 + data[i,1]**2)
+        theta[i] = np.arccos(data[i,0]/r[i])
+    
+    # r = ae**theta
     raise NotImplementedError
